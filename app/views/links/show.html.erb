@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p class="link title">
+  <%= @link.title %>
+</p>
+
+<p class="link desc">
+  <%= @link.description %>
+</p>
+
+<p>
+  Submitted by <%= @link.user.user_name %>
+</p>
+
+<ul>
+  <% @link.comments.each do |comment| %>
+    <li>
+      <%= comment.body %>
+      <%= comment.user.user_name %>
+      <% if user_signed_in? and comment.user_id == current_user.id %>
+        <%= link_to 'Delete', [@link, comment], method: :delete %>
+      <% end %>
+  </li>
+  <% end %>
+</ul>
+
+<% if user_signed_in? %>
+  <%= form_for [@link, Comment.new] do |f| %>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+    <%= f.submit "Comment" %>
+  <% end %>
+<% else %>
+  <%= link_to 'Sign in to Comment', new_user_session_path %>
+<% end %>
+
+<br>
+
+<%= link_to 'Back', links_path %>
+

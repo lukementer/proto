@@ -1,0 +1,39 @@
+<nav class="top-bar" data-topbar>
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="/">Proto</a></h1>
+    </li>
+     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <% if user_signed_in? %>
+    <ul class="right">
+      <li class="has-dropdown">
+        <a><%= current_user.user_name %></a>
+        <ul class="dropdown">
+          <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
+          <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+        </ul>
+      </li>
+    </ul>
+    <% else %>
+    <ul class="right">
+      <li class="has-dropdown">
+        <a>Please Login</a>
+        <ul class="dropdown">
+          <li><%= link_to "Login", new_user_session_path %></li>
+          <li><%= link_to "Sign up", new_user_registration_path %></li>
+        </ul>
+      </li>
+    </ul>
+    <% end %>
+    
+    <!-- Left Nav Section -->
+    <ul class="left">
+      
+    </ul>
+  </section>
+</nav>
